@@ -42,6 +42,16 @@ body{
     animation:float 5s ease-in-out infinite;
 }
 
+@keyframes pulsePromo {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+.promo-badge{
+    animation: pulsePromo 2s infinite;
+}
+
 @keyframes float{
     0%{transform:translateY(0);}
     50%{transform:translateY(-10px);}
@@ -327,6 +337,9 @@ class="inline-flex mt-10 bg-white text-[#B88BA7] px-10 py-5 rounded-2xl font-bla
             <!-- Countdown -->
 
 <div class="max-w-4xl mx-auto mb-10">
+<div class="promo-badge inline-flex items-center gap-2 bg-yellow-400 text-gray-900 px-4 py-2 rounded-full font-bold mt-4">
+    🔥 فرصت محدود فروش ویژه
+</div>
 
     <div class="bg-gradient-to-l from-red-500 to-rose-500 text-white rounded-3xl p-8 shadow-xl">
 
