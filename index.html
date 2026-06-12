@@ -323,6 +323,84 @@ class="inline-flex mt-10 bg-white text-[#B88BA7] px-10 py-5 rounded-2xl font-bla
             <span class="inline-flex items-center px-5 py-2 rounded-full bg-red-50 text-red-600 font-bold text-sm">
                 🔥 پروموشن ویژه فروش
             </span>
+            
+            <!-- Countdown -->
+
+<div class="max-w-4xl mx-auto mb-10">
+
+    <div class="bg-gradient-to-l from-red-500 to-rose-500 text-white rounded-3xl p-8 shadow-xl">
+
+        <div class="text-center">
+
+            <div class="text-3xl mb-3">
+                ⏰
+            </div>
+
+            <h3 class="text-2xl md:text-3xl font-black">
+                زمان باقی مانده تا پایان پروموشن ویژه
+            </h3>
+
+            <p class="mt-2 text-white/90">
+                اعتبار جشنواره تا ۲۵ خردادماه
+            </p>
+
+        </div>
+
+        <div class="grid grid-cols-4 gap-4 mt-8 text-center">
+
+            <div class="bg-white/15 rounded-2xl py-5">
+
+                <div id="days" class="text-3xl md:text-4xl font-black">
+                    00
+                </div>
+
+                <div class="text-sm mt-2">
+                    روز
+                </div>
+
+            </div>
+
+            <div class="bg-white/15 rounded-2xl py-5">
+
+                <div id="hours" class="text-3xl md:text-4xl font-black">
+                    00
+                </div>
+
+                <div class="text-sm mt-2">
+                    ساعت
+                </div>
+
+            </div>
+
+            <div class="bg-white/15 rounded-2xl py-5">
+
+                <div id="minutes" class="text-3xl md:text-4xl font-black">
+                    00
+                </div>
+
+                <div class="text-sm mt-2">
+                    دقیقه
+                </div>
+
+            </div>
+
+            <div class="bg-white/15 rounded-2xl py-5">
+
+                <div id="seconds" class="text-3xl md:text-4xl font-black">
+                    00
+                </div>
+
+                <div class="text-sm mt-2">
+                    ثانیه
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
             <h2 class="mt-6 text-4xl md:text-5xl font-black text-gray-900">
                 جشنواره ویژه اویدرم
@@ -814,6 +892,52 @@ setInterval(()=>{
     showSlide(currentSlide);
 
 },4000);
+
+</script>
+<script>
+
+const countdownDate = new Date("2026-06-15T23:59:59").getTime();
+
+const timer = setInterval(function(){
+
+    const now = new Date().getTime();
+
+    const distance = countdownDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+        (distance % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
+
+    const seconds = Math.floor(
+        (distance % (1000 * 60))
+        / 1000
+    );
+
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    document.getElementById("seconds").innerHTML = seconds;
+
+    if(distance < 0){
+
+        clearInterval(timer);
+
+        document.getElementById("days").innerHTML = "00";
+        document.getElementById("hours").innerHTML = "00";
+        document.getElementById("minutes").innerHTML = "00";
+        document.getElementById("seconds").innerHTML = "00";
+
+    }
+
+},1000);
 
 </script>
 
