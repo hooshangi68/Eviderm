@@ -33,10 +33,7 @@
 </div>
 </div>
 
-<div id="newBox" class="hidden mt-6">
-<input id="phone" placeholder="شماره تماس داروخانه" class="w-full border p-3 rounded-xl mb-3">
-  تصویر پروانه تاسیس را ارسال بفرمایید
-<input id="license" type="file" class="w-full border p-3 rounded-xl mb-3" >
+
 
 <button onclick="verifyNew()" class="bg-indigo-600 text-white p-3 rounded-xl">
 تایید و ادامه
@@ -246,7 +243,7 @@ isNewCustomer = true;
 
 document.getElementById("step1").classList.add("hidden");
 
-document.getElementById("newBox").innerHTML = 
+document.getElementById("newBox").innerHTML = `
 
 <div class="bg-yellow-50 border border-yellow-300 rounded-2xl p-5 text-center">
 
@@ -290,13 +287,22 @@ class="bg-indigo-600 text-white px-8 py-3 rounded-xl mt-6">
 
 </div>
 
-;
+`;
 
 document.getElementById("newBox").classList.remove("hidden");
 
 }
 
 function verifyNew(){
+  const chk = document.getElementById("licenseSent");
+
+if(!chk || !chk.checked){
+
+alert("ابتدا تیک را بزنید.");
+
+return;
+
+}
 
 if(!document.getElementById("licenseSent").checked){
 
@@ -372,32 +378,31 @@ async function sendOrder() {
 
     try {
 
-        const response = await fetch(WEBHOOK, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(order)
-        });
+    const response = await fetch(WEBHOOK, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(order)
+    });
 
-        const result = await response.json();
+    const text = await response.text();
 
-        if (result.success) {
+    console.log(text);
 
-            alert("✅ سفارش با موفقیت ثبت شد\n\nکد سفارش:\n" + result.orderCode);
+    const result = JSON.parse(text);
 
-            basket = [];
-            renderBasket();
+    if(result.success){
 
-            pharmacy.value = "";
-            description.value = "";
-            qty.value = 1;
+        alert("سفارش ثبت شد");
 
-        } else {
+    }else{
 
-            alert("خطا:\n" + result.error);
+        alert(result.error);
 
-        }
+    }
+
+}
 
     } catch (err) {
 
