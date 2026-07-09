@@ -35,9 +35,7 @@
 
 
 
-<button onclick="verifyNew()" class="bg-indigo-600 text-white p-3 rounded-xl">
-تایید و ادامه
-</button>
+<div id="newBox" class="hidden mt-6"></div>
 </div>
 
 <div id="orderBox" class="hidden mt-6">
@@ -69,10 +67,7 @@ class="w-full border p-3 rounded-xl mt-4"></textarea>
 class="bg-black text-white p-4 rounded-xl mt-4 w-full">
 ارسال سفارش
 </button>
-  <button 
-class="bg-black text-white p-4 rounded-xl mt-4 w-full">
-<a href="https://hooshangi68.github.io/Eviderm/">بازگشت به صفحه اصلی</a>
-</button>
+  <a href="https://hooshangi68.github.io/Eviderm/" class="bg-black text-white p-4 rounded-xl mt-4 w-full block text-center">بازگشت به صفحه اصلی</a>
 
 </div>
 </div>
@@ -81,7 +76,7 @@ class="bg-black text-white p-4 rounded-xl mt-4 w-full">
 <script>
 
 
-const phone = document.getElementById("phone");
+const phone={value:""};
 const pharmacy = document.getElementById("pharmacy");
 const description = document.getElementById("description");
 const category = document.getElementById("category");
@@ -402,9 +397,7 @@ async function sendOrder() {
 
     }
 
-}
-
-    } catch (err) {
+} catch (err) {
 
         console.error(err);
 
