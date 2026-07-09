@@ -83,7 +83,7 @@ class="bg-black text-white p-4 rounded-xl mt-4 w-full">
 
 <script>
 
-const licenseInput = document.getElementById("license");
+
 const phone = document.getElementById("phone");
 const pharmacy = document.getElementById("pharmacy");
 const description = document.getElementById("description");
@@ -94,7 +94,7 @@ const cart = document.getElementById("cart");
 const count = document.getElementById("count");
 const sendBtn = document.getElementById("sendBtn");
 
-const WEBHOOK = "https://eviderm.app.n8n.cloud/webhook/eviderm-order";
+const WEBHOOK = "https://script.google.com/macros/s/AKfycbzBhahymIpAlNCMN8suTpVIlpjN9pJu_O_gaFcaJgM5Wl7rX9LVz0r-JXMXjHbUJ_Bp/exec";
 
 let basket = [];
 let isNewCustomer = false; // ✅ اصلاح مهم
@@ -241,21 +241,77 @@ loadProducts();
 }
 
 function newCustomer(){
-isNewCustomer = true; // ✅ اصلاح مهم
+
+isNewCustomer = true;
+
 document.getElementById("step1").classList.add("hidden");
+
+document.getElementById("newBox").innerHTML = 
+
+<div class="bg-yellow-50 border border-yellow-300 rounded-2xl p-5 text-center">
+
+<h2 class="text-2xl font-bold mb-4">
+🆕 مشتری جدید
+</h2>
+
+<p class="mb-4 leading-8">
+جهت شروع همکاری با شرکت اویدرم، لطفاً ابتدا تصویر پروانه تأسیس داروخانه را
+از طریق واتساپ به شماره زیر ارسال نمایید.
+</p>
+
+<a
+href="https://wa.me/989053378282?text=سلام،%20جهت%20شروع%20همکاری%20با%20اویدرم%20تصویر%20پروانه%20تأسیس%20داروخانه%20را%20ارسال%20می‌کنیم."
+target="_blank"
+class="bg-green-600 text-white px-6 py-3 rounded-xl inline-block mt-3">
+
+📲 ارسال در واتساپ
+
+</a>
+
+<div class="mt-6">
+
+<label class="flex items-center justify-center gap-2">
+
+<input type="checkbox" id="licenseSent">
+
+<span>تصویر پروانه را ارسال کرده‌ام.</span>
+
+</label>
+
+</div>
+
+<button
+onclick="verifyNew()"
+class="bg-indigo-600 text-white px-8 py-3 rounded-xl mt-6">
+
+ادامه ثبت سفارش
+
+</button>
+
+</div>
+
+;
+
 document.getElementById("newBox").classList.remove("hidden");
+
 }
 
 function verifyNew(){
 
-if(!phone.value || !licenseInput.files.length){
-alert("شماره تماس و پروانه تاسیس الزامی است");
+if(!document.getElementById("licenseSent").checked){
+
+alert("لطفاً ابتدا تصویر پروانه تأسیس را از طریق واتساپ ارسال نمایید.");
+
 return;
+
 }
 
 document.getElementById("newBox").classList.add("hidden");
+
 document.getElementById("orderBox").classList.remove("hidden");
+
 loadProducts();
+
 }
 
 function loadProducts(){
@@ -291,62 +347,69 @@ basket.splice(i,1);
 renderBasket();
 }
 
-async function sendOrder(){
+async function sendOrder() {
 
-if(!pharmacy.value){
-alert("نام داروخانه را وارد کنید");
-return;
-}
+    if (!pharmacy.value.trim()) {
+        alert("نام داروخانه را وارد کنید");
+        return;
+    }
 
-if(basket.length===0){
-alert("سبد سفارش خالی است");
-return;
-}
+    if (basket.length === 0) {
+        alert("حداقل یک محصول انتخاب کنید");
+        return;
+    }
 
-// ✅ چک درست مشتری جدید
-if(isNewCustomer && !licenseInput.files.length){
-alert("آپلود پروانه الزامی است");
-return;
-}
+    sendBtn.disabled = true;
+    sendBtn.innerText = "در حال ارسال...";
 
-const formData = new FormData();
+    const order = {
+        pharmacy: pharmacy.value.trim(),
+        phone: phone.value.trim() || "",
+        items: basket,
+        description: description.value.trim(),
+        orderDate: new Date().toISOString()
+    };
 
-formData.append("pharmacy", pharmacy.value);
-formData.append("phone", phone.value || "ثبت نشده");
-formData.append("items", JSON.stringify(basket));
-formData.append("description", description.value);
-formData.append("orderDate", new Date().toLocaleString("fa-IR"));
+    try {
 
-// ✅ ارسال فایل
-if(isNewCustomer){
-formData.append("license", licenseInput.files[0]);
-}
+        const response = await fetch(WEBHOOK, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(order)
+        });
 
-sendBtn.disabled = true;
+        const result = await response.json();
 
-try{
+        if (result.success) {
 
-const res = await fetch(WEBHOOK,{
-method:"POST",
-body:formData
-});
+            alert("✅ سفارش با موفقیت ثبت شد\n\nکد سفارش:\n" + result.orderCode);
 
-if(!res.ok){
-throw new Error("Webhook failed");
-}
+            basket = [];
+            renderBasket();
 
-alert("✅ سفارش با موفقیت ارسال شد");
+            pharmacy.value = "";
+            description.value = "";
+            qty.value = 1;
 
-basket=[];
-renderBasket();
-description.value="";
+        } else {
 
-}catch(e){
-console.error(e);
-alert("❌ خطا در ارسال سفارش");
-}
+            alert("خطا:\n" + result.error);
 
-sendBtn.disabled = false;
+        }
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert("ارتباط با سرور برقرار نشد.");
+
+    }
+
+    sendBtn.disabled = false;
+    sendBtn.innerText = "ارسال سفارش";
+
 }
 
 loadProducts();
