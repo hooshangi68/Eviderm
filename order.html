@@ -42,18 +42,103 @@
 
 <div id="orderBox" class="hidden mt-6">
 
-<input id="pharmacy" placeholder="نام داروخانه" class="w-full border p-3 rounded-xl mb-3">
-  <input
-id="customerName"
-placeholder="نام سفارش‌دهنده"
-class="w-full border p-3 rounded-xl mb-3">
+<!-- اطلاعات سفارش -->
+<div class="bg-white rounded-3xl shadow-lg border border-slate-200 overflow-hidden mb-6">
 
-<input
-id="customerPhone"
-type="tel"
-placeholder="شماره تماس سفارش‌دهنده"
-class="w-full border p-3 rounded-xl mb-3">
+    <div class="bg-gradient-to-l from-pink-600 to-fuchsia-600 text-white px-6 py-4">
 
+        <h3 class="text-xl font-bold">
+            👤 اطلاعات سفارش
+        </h3>
+
+        <p class="text-sm text-pink-100 mt-1">
+            لطفاً اطلاعات زیر را با دقت وارد نمایید.
+        </p>
+
+    </div>
+
+    <div class="p-6 space-y-5">
+
+        <!-- نام داروخانه -->
+        <div>
+
+            <label class="block font-bold text-slate-700 mb-2">
+                🏥 نام داروخانه
+            </label>
+
+            <input
+                id="pharmacy"
+                type="text"
+                placeholder="مثلاً داروخانه دکتر ابراهیمی پور"
+                class="w-full rounded-2xl border-2 border-slate-200 p-4 focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition">
+
+        </div>
+
+        <!-- نام سفارش دهنده -->
+        <div>
+
+            <label class="block font-bold text-slate-700 mb-2">
+                👤 نام سفارش‌دهنده
+            </label>
+
+            <input
+                id="customerName"
+                type="text"
+                placeholder="نام و نام خانوادگی"
+                class="w-full rounded-2xl border-2 border-slate-200 p-4 focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition">
+
+        </div>
+
+        <!-- شماره تماس -->
+        <div>
+
+            <label class="block font-bold text-slate-700 mb-2">
+                📱 شماره تماس سفارش‌دهنده
+            </label>
+
+            <input
+                id="customerPhone"
+                type="tel"
+                placeholder="09123456789"
+                class="w-full rounded-2xl border-2 border-slate-200 p-4 focus:border-green-500 focus:ring-4 focus:ring-green-100 outline-none transition">
+
+            <!-- پیام راهنما -->
+            <div class="mt-4 bg-green-50 border-r-4 border-green-500 rounded-2xl p-4">
+
+                <div class="flex items-start gap-3">
+
+                    <div class="w-11 h-11 rounded-full bg-green-600 text-white flex items-center justify-center text-xl flex-shrink-0">
+                        💬
+                    </div>
+
+                    <div>
+
+                        <h4 class="font-bold text-green-800 mb-1">
+                            اطلاع‌رسانی وضعیت سفارش
+                        </h4>
+
+                        <p class="text-sm leading-7 text-slate-700">
+
+                            لطفاً شماره موبایلی را وارد نمایید که <span class="font-bold text-green-700">واتساپ روی آن فعال باشد.</span>
+                            کارشناسان فروش اویدرم جهت ارسال
+                            <span class="font-bold">کد سفارش</span>،
+                            پیگیری سفارش و اطلاع‌رسانی وضعیت سفارش از طریق همین شماره با شما در ارتباط خواهند بود.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+  
 <select id="category" class="w-full border p-3 rounded-xl mb-3" onchange="loadProducts()"></select>
 
 <select id="product" class="w-full border p-3 rounded-xl mb-3"></select>
