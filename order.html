@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -388,13 +389,13 @@ async function sendOrder() {
 
     if(result.success){
 
-        alert("سفارش ثبت شد");
+    showSuccess(result.orderCode);
 
-    }else{
+}else{
 
-        alert(result.error);
+    alert(result.error || "خطا در ثبت سفارش");
 
-    }
+}
 
 } catch (err) {
 
@@ -409,9 +410,100 @@ async function sendOrder() {
 
 }
 
+  function showSuccess(code){
+
+    document.getElementById("orderCodeText").innerText = code;
+
+    document.getElementById("successModal").classList.remove("hidden");
+
+    document.getElementById("successModal").classList.add("flex");
+
+    // خالی کردن فرم
+
+    basket=[];
+
+    renderBasket();
+
+    pharmacy.value="";
+
+    description.value="";
+
+    qty.value=1;
+
+    category.selectedIndex=0;
+
+    loadProducts();
+
+}
+
+function closeSuccess(){
+
+    document.getElementById("successModal").classList.add("hidden");
+
+    document.getElementById("successModal").classList.remove("flex");
+
+}
+
 loadProducts();
 
 </script>
+
+  <div id="successModal"
+class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50">
+
+    <div class="bg-white rounded-3xl shadow-2xl w-[92%] max-w-md p-8">
+
+        <div class="flex justify-center">
+
+            <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center text-5xl">
+
+                ✅
+
+            </div>
+
+        </div>
+
+        <h2 class="text-center text-3xl font-black mt-6">
+
+            سفارش ثبت شد
+
+        </h2>
+
+        <p class="text-center text-slate-500 mt-3 leading-8">
+
+            سفارش شما با موفقیت ثبت شد.
+
+            همکاران ما در اولین فرصت آن را بررسی خواهند کرد.
+
+        </p>
+
+        <div class="bg-slate-100 rounded-2xl p-5 mt-8">
+
+            <div class="text-center text-slate-500">
+
+                کد پیگیری سفارش
+
+            </div>
+
+            <div
+            id="orderCodeText"
+            class="text-center text-4xl font-black text-pink-600 mt-3 tracking-wider">
+
+            </div>
+
+        </div>
+
+        <button
+        onclick="closeSuccess()"
+        class="mt-8 w-full bg-pink-600 hover:bg-pink-700 text-white py-4 rounded-2xl font-bold">
+
+            متوجه شدم
+
+        </button>
+
+    </div>
+
+</div>
 
 </body>
 </html>
