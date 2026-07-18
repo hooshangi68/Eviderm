@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -10,6 +11,98 @@
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
+  <style>
+
+.step{
+
+flex:1;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+font-weight:bold;
+
+color:#94a3b8;
+
+}
+
+.circle{
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+background:#cbd5e1;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:22px;
+
+color:white;
+
+transition:.4s;
+
+}
+
+.line{
+
+flex:1;
+
+height:5px;
+
+background:#e2e8f0;
+
+margin:0 10px;
+
+border-radius:20px;
+
+}
+
+.active .circle{
+
+background:#db2777;
+
+box-shadow:0 10px 25px rgba(219,39,119,.35);
+
+}
+
+.active{
+
+color:#111827;
+
+}
+
+.done .circle{
+
+background:#16a34a;
+
+}
+
+.done .circle::after{
+
+content:"✓";
+
+font-size:22px;
+
+}
+
+.done .line{
+
+background:#16a34a;
+
+}
+
+</style>
+
 <body class="bg-slate-100">
 
 <div class="max-w-6xl mx-auto p-4">
@@ -18,6 +111,8 @@
 <h1 class="text-3xl font-bold mb-6">
 ثبت سفارش آنلاین Eviderm
 </h1>
+
+  
 
 <div id="step1">
 <h2 class="font-bold mb-4">
@@ -41,6 +136,33 @@
 </div>
 
 <div id="orderBox" class="hidden mt-6">
+
+  <div class="bg-white rounded-3xl shadow-lg p-6 mb-8">
+
+    <div class="flex items-center">
+
+        <div class="step active" id="stepInfo">
+            <div class="circle">1</div>
+            <span>اطلاعات سفارش</span>
+        </div>
+
+        <div class="line" id="line1"></div>
+
+        <div class="step" id="stepProduct">
+            <div class="circle">2</div>
+            <span>انتخاب محصولات</span>
+        </div>
+
+        <div class="line" id="line2"></div>
+
+        <div class="step" id="stepFinish">
+            <div class="circle">3</div>
+            <span>ثبت نهایی</span>
+        </div>
+
+    </div>
+
+</div>
 
 <!-- اطلاعات سفارش -->
 <div class="bg-white rounded-3xl shadow-lg border border-slate-200 overflow-hidden mb-6">
@@ -182,6 +304,11 @@ const qty = document.getElementById("qty");
 const cart = document.getElementById("cart");
 const count = document.getElementById("count");
 const sendBtn = document.getElementById("sendBtn");
+pharmacy.addEventListener("input", updateProgress);
+
+customerName.addEventListener("input", updateProgress);
+
+customerPhone.addEventListener("input", updateProgress);
 
 const WEBHOOK = "https://script.google.com/macros/s/AKfycbzBhahymIpAlNCMN8suTpVIlpjN9pJu_O_gaFcaJgM5Wl7rX9LVz0r-JXMXjHbUJ_Bp/exec";
 
@@ -384,6 +511,25 @@ class="bg-indigo-600 text-white px-8 py-3 rounded-xl mt-6">
 document.getElementById("newBox").classList.remove("hidden");
 
 }
+  
+
+  function copyCode(){
+
+navigator.clipboard.writeText(
+
+document.getElementById("orderCodeBox").innerText
+
+);
+
+alert("کد سفارش کپی شد.");
+
+}
+
+function closeModal(){
+
+document.getElementById("successModal").classList.add("hidden");
+
+}
 
 function verifyNew(){
   const chk = document.getElementById("licenseSent");
@@ -418,12 +564,29 @@ product.innerHTML = products[c].map(x=>`<option>${x}</option>`).join("");
 }
 
 function addItem(){
+
 basket.push({
 category:category.value,
 product:product.value,
 qty:Number(qty.value)
 });
+
+// اگر اولین محصول بود
+if(basket.length===1){
+
+document.getElementById("stepProduct").classList.remove("active");
+document.getElementById("stepProduct").classList.add("done");
+
+document.getElementById("stepFinish").classList.add("active");
+
+document.getElementById("line2").style.background="#16a34a";
+
+}
+
 renderBasket();
+
+updateProgress();
+
 }
 
 function renderBasket(){
@@ -443,6 +606,8 @@ class="bg-red-600 text-white px-2 rounded">حذف</button>
 function removeItem(i){
 basket.splice(i,1);
 renderBasket();
+
+updateProgress();
 }
 
 async function sendOrder() {
@@ -466,6 +631,8 @@ if(!customerPhone.value.trim()){
     return;
 
 }
+
+   
 
     if (basket.length === 0) {
         alert("حداقل یک محصول انتخاب کنید");
@@ -499,6 +666,20 @@ if(!customerPhone.value.trim()){
     const result = JSON.parse(text);
 
     if(result.success){
+// تکمیل مرحله انتخاب محصولات
+document.getElementById("stepProduct").classList.remove("active");
+document.getElementById("stepProduct").classList.add("done");
+
+// فعال کردن مرحله ثبت نهایی
+document.getElementById("stepFinish").classList.remove("active");
+document.getElementById("stepFinish").classList.add("done");
+
+// سبز شدن خط دوم
+document.getElementById("line2").style.background = "#16a34a";
+
+// نمایش پنجره موفقیت
+showSuccess(result.orderCode);
+    
 
     showSuccess(result.orderCode);
 
@@ -552,6 +733,49 @@ function closeSuccess(){
     document.getElementById("successModal").classList.add("hidden");
 
     document.getElementById("successModal").classList.remove("flex");
+
+}
+
+  function updateProgress(){
+
+    // ریست همه مراحل
+    document.getElementById("stepInfo").className="step";
+    document.getElementById("stepProduct").className="step";
+    document.getElementById("stepFinish").className="step";
+
+    document.getElementById("line1").style.background="#e2e8f0";
+    document.getElementById("line2").style.background="#e2e8f0";
+
+    // مرحله اول
+    if(
+        pharmacy.value.trim() &&
+        customerName.value.trim() &&
+        customerPhone.value.trim()
+    ){
+
+        document.getElementById("stepInfo").classList.add("done");
+
+        document.getElementById("line1").style.background="#16a34a";
+
+        document.getElementById("stepProduct").classList.add("active");
+
+    }else{
+
+        document.getElementById("stepInfo").classList.add("active");
+
+    }
+
+    // مرحله دوم
+    if(basket.length>0){
+
+        document.getElementById("stepProduct").classList.remove("active");
+        document.getElementById("stepProduct").classList.add("done");
+
+        document.getElementById("line2").style.background="#16a34a";
+
+        document.getElementById("stepFinish").classList.add("active");
+
+    }
 
 }
 
@@ -613,6 +837,51 @@ class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-ce
         </button>
 
     </div>
+
+</div>
+
+  <div id="successModal"
+class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+
+<div class="bg-white rounded-3xl p-8 w-[420px] text-center shadow-2xl">
+
+<div class="text-7xl mb-4">
+✅
+</div>
+
+<h2 class="text-3xl font-black text-green-600">
+سفارش ثبت شد
+</h2>
+
+<p class="mt-4 text-slate-600">
+
+کد سفارش شما
+
+</p>
+
+<div id="orderCodeBox"
+
+class="bg-slate-100 rounded-2xl p-4 text-2xl font-black mt-4">
+
+</div>
+
+<button onclick="copyCode()"
+
+class="bg-pink-600 text-white rounded-xl px-6 py-3 mt-5">
+
+📋 کپی کد سفارش
+
+</button>
+
+<button onclick="closeModal()"
+
+class="bg-black text-white rounded-xl px-6 py-3 mt-3 w-full">
+
+بستن
+
+</button>
+
+</div>
 
 </div>
 
