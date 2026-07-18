@@ -8,10 +8,55 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eviderm Order Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+
+*{
+font-family:'Vazirmatn',sans-serif;
+}
+
+body{
+font-family:'Vazirmatn',sans-serif;
+background:#eef3f8;
+}
+    /* انیمیشن باز شدن مودال */
+
+@keyframes popup{
+
+0%{
+transform:scale(.7);
+opacity:0;
+}
+
+60%{
+transform:scale(1.05);
+opacity:1;
+}
+
+100%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+.animate-popup{
+
+animation:popup .35s ease;
+
+}
+
+</style>
 </head>
 
   <style>
+
+    
 
 .step{
 
@@ -314,6 +359,9 @@ const WEBHOOK = "https://script.google.com/macros/s/AKfycbzBhahymIpAlNCMN8suTpVI
 
 let basket = [];
 let isNewCustomer = false; // ✅ اصلاح مهم
+  let lastOrderCode = "";
+let lastOrderDate = "";
+  let receiptData = {};
 
 const products = {
 
@@ -677,11 +725,33 @@ document.getElementById("stepFinish").classList.add("done");
 // سبز شدن خط دوم
 document.getElementById("line2").style.background = "#16a34a";
 
+      lastOrderCode=result.orderCode;
+
+lastOrderDate=new Date().toLocaleString("fa-IR");
+
+      receiptData = {
+
+    orderCode: result.orderCode,
+
+    pharmacy: pharmacy.value,
+
+    customerName: customerName.value,
+
+    customerPhone: customerPhone.value,
+
+    description: description.value,
+
+    items: [...basket],
+
+    date: new Date().toLocaleString("fa-IR")
+
+};
+
 // نمایش پنجره موفقیت
 showSuccess(result.orderCode);
     
 
-    showSuccess(result.orderCode);
+    
 
 }else{
 
@@ -779,6 +849,62 @@ function closeSuccess(){
 
 }
 
+  function showReceipt(){
+
+document.getElementById("rOrderCode").innerText = receiptData.orderCode;
+
+document.getElementById("rDate").innerText = receiptData.date;
+
+document.getElementById("rPharmacy").innerText = receiptData.pharmacy;
+
+document.getElementById("rCustomer").innerText = receiptData.customerName;
+
+document.getElementById("rPhone").innerText = receiptData.customerPhone;
+
+let html = "";
+
+receiptData.items.forEach(item=>{
+
+html += `
+
+<div class="flex justify-between border rounded-xl p-3">
+
+<div>
+
+<b>${item.product}</b>
+
+<div class="text-sm text-gray-500">
+
+${item.category}
+
+</div>
+
+</div>
+
+<div class="font-bold">
+
+${item.qty} عدد
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("receiptItems").innerHTML = html;
+
+document.getElementById("receiptModal").classList.remove("hidden");
+
+}
+
+  function closeReceipt(){
+
+document.getElementById("receiptModal").classList.add("hidden");
+
+}
+
 loadProducts();
 
 </script>
@@ -786,7 +912,7 @@ loadProducts();
   <div id="successModal"
 class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50">
 
-    <div class="bg-white rounded-3xl shadow-2xl w-[92%] max-w-md p-8">
+    <div class="bg-white rounded-3xl shadow-2xl w-[390px] p-8 animate-popup">
 
         <div class="flex justify-center">
 
@@ -827,6 +953,13 @@ class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-ce
             </div>
 
         </div>
+      <button
+onclick="showReceipt()"
+class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-bold transition">
+
+📄 مشاهده رسید سفارش
+
+</button>
 
         <button
         onclick="closeSuccess()"
@@ -873,6 +1006,14 @@ class="bg-pink-600 text-white rounded-xl px-6 py-3 mt-5">
 
 </button>
 
+  <button
+onclick="showReceipt()"
+class="w-full mt-3 bg-pink-600 hover:bg-pink-700 text-white py-3 rounded-xl transition">
+
+📄 مشاهده رسید سفارش
+
+</button>
+
 <button onclick="closeModal()"
 
 class="bg-black text-white rounded-xl px-6 py-3 mt-3 w-full">
@@ -882,6 +1023,98 @@ class="bg-black text-white rounded-xl px-6 py-3 mt-3 w-full">
 </button>
 
 </div>
+
+</div>
+
+  <!-- Receipt Modal -->
+
+<div id="receiptModal"
+class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+
+    <div class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full overflow-hidden">
+
+        <!-- Header -->
+
+        <div class="bg-gradient-to-l from-pink-600 to-rose-500 text-white p-6">
+
+            <h2 class="text-3xl font-black">
+                رسید ثبت سفارش
+            </h2>
+
+            <p class="opacity-90 mt-2">
+                شرکت محصولات تخصصی پوست و موی اویدرم
+            </p>
+
+        </div>
+
+        <!-- Body -->
+
+        <div class="p-8">
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <div>
+                    <div class="text-gray-500 text-sm">کد سفارش</div>
+                    <div id="rOrderCode" class="font-black text-2xl text-pink-600"></div>
+                </div>
+
+                <div>
+                    <div class="text-gray-500 text-sm">تاریخ ثبت</div>
+                    <div id="rDate"></div>
+                </div>
+
+                <div>
+                    <div class="text-gray-500 text-sm">داروخانه</div>
+                    <div id="rPharmacy"></div>
+                </div>
+
+                <div>
+                    <div class="text-gray-500 text-sm">ثبت کننده سفارش</div>
+                    <div id="rCustomer"></div>
+                </div>
+
+                <div>
+                    <div class="text-gray-500 text-sm">شماره تماس</div>
+                    <div id="rPhone"></div>
+                </div>
+
+                <div>
+                    <div class="text-gray-500 text-sm">وضعیت</div>
+
+                    <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full">
+                        در انتظار بررسی
+                    </span>
+
+                </div>
+
+            </div>
+
+            <hr class="my-8">
+
+            <h3 class="font-bold text-xl mb-4">
+                محصولات سفارش
+            </h3>
+
+            <div id="receiptItems"
+                 class="space-y-3">
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+
+        <div class="bg-slate-100 p-5 flex gap-3">
+
+            <button onclick="closeReceipt()"
+            class="flex-1 bg-slate-700 text-white rounded-xl py-3">
+
+                بستن
+
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
