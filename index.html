@@ -1,6 +1,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -89,6 +91,29 @@ body{
 }
 .countdown-glow{animation:promoGlow 3s infinite;}
 @keyframes promoGlow{0%{box-shadow:0 15px 40px rgba(239,68,68,.25);}50%{box-shadow:0 20px 60px rgba(239,68,68,.45);}100%{box-shadow:0 15px 40px rgba(239,68,68,.25);}}
+
+ .product-list{
+
+max-height:0;
+
+overflow:hidden;
+
+opacity:0;
+
+transition:
+max-height .45s ease,
+opacity .35s ease,
+margin .35s ease;
+
+}
+
+.product-list.open{
+
+max-height:3500px;
+
+opacity:1;
+
+}
 
 </style>
 
@@ -354,245 +379,1066 @@ class="inline-flex mt-10 bg-white text-[#B88BA7] px-10 py-5 rounded-2xl font-bla
 <section id="promotion" class="reveal py-24 bg-[#FAFAFB]">
 <div class="max-w-7xl mx-auto px-6">
 
-<div class="text-center mb-14">
-<span class="inline-flex items-center gap-2 bg-amber-100 text-amber-800 px-5 py-2 rounded-full font-bold">🔥 جشنواره فروش تیرماه</span>
-<h2 class="mt-5 text-4xl md:text-5xl font-black text-slate-900">پروموشن ویژه تیرماه ۱۴۰۵</h2>
-<p class="mt-3 text-slate-500">اعتبار جشنواره تا پایان تیرماه ۱۴۰۵</p>
+<div class="text-center mb-16">
+
+    <span class="inline-flex items-center gap-2 px-6 py-2 rounded-full
+    bg-gradient-to-r from-orange-500 to-amber-400
+    text-white text-sm font-bold shadow-lg">
+
+        🔥 جشنواره فروش ویژه مردادماه ۱۴۰۵
+
+    </span>
+
+    <h2 class="mt-6 text-5xl font-black text-slate-900 leading-tight">
+
+        پروموشن ویژه مردادماه
+
+    </h2>
+
+    <p class="mt-4 text-lg text-slate-500">
+
+        اعتبار جشنواره تا پایان مردادماه ۱۴۰۵
+
+    </p>
+
 </div>
 
-<div class="countdown-glow bg-gradient-to-l from-red-500 via-rose-500 to-pink-500 rounded-[36px] p-8 md:p-10 text-white mb-16">
-<div class="text-center">
-<div class="text-5xl mb-4">⏰</div>
-<h3 class="text-2xl md:text-4xl font-black">زمان باقی‌مانده تا پایان جشنواره</h3>
-<p class="mt-3 text-white/90">فرصت محدود برای بهره‌مندی از آفرهای ویژه اویدرم</p>
+
+
+  <!-- Hero Promotion -->
+
+<div class="relative overflow-hidden rounded-[40px] mb-16">
+
+<div class="absolute inset-0 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500"></div>
+
+<div class="absolute -top-24 -left-24 w-72 h-72 bg-yellow-300 opacity-20 rounded-full blur-3xl"></div>
+
+<div class="absolute -bottom-24 -right-24 w-72 h-72 bg-pink-300 opacity-20 rounded-full blur-3xl"></div>
+
+<div class="relative grid lg:grid-cols-2 gap-10 items-center px-10 py-12">
+
+<div>
+
+<span class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-xl px-5 py-2 rounded-full font-bold">
+
+🔥 جشنواره مرداد ۱۴۰۵
+
+</span>
+
+<h2 class="text-5xl font-black text-white mt-6 leading-tight">
+
+تا
+
+<span class="text-yellow-300">
+
+۷ محصول رایگان
+
+</span>
+
+هدیه بگیرید
+
+</h2>
+
+<p class="text-white/90 mt-6 leading-9 text-lg">
+
+با خرید محصولات منتخب اویدرم، از آفرهای ویژه مردادماه استفاده کنید.
+
+این جشنواره فقط تا پایان مرداد اعتبار دارد.
+
+</p>
+
+<a href="order.html"
+
+class="inline-flex items-center gap-3 mt-8 bg-white text-red-600 font-black px-8 py-4 rounded-2xl shadow-xl hover:scale-105 transition">
+
+🛒 ثبت سفارش
+
+</a>
+
 </div>
-<div class="grid grid-cols-4 gap-3 md:gap-6 mt-10">
-<div class="bg-white/15 rounded-2xl py-5 text-center"><div id="days" class="text-3xl md:text-5xl font-black">00</div><div class="mt-2 text-sm">روز</div></div>
-<div class="bg-white/15 rounded-2xl py-5 text-center"><div id="hours" class="text-3xl md:text-5xl font-black">00</div><div class="mt-2 text-sm">ساعت</div></div>
-<div class="bg-white/15 rounded-2xl py-5 text-center"><div id="minutes" class="text-3xl md:text-5xl font-black">00</div><div class="mt-2 text-sm">دقیقه</div></div>
-<div class="bg-white/15 rounded-2xl py-5 text-center"><div id="seconds" class="text-3xl md:text-5xl font-black">00</div><div class="mt-2 text-sm">ثانیه</div></div>
+
+<div>
+
+<div class="grid grid-cols-4 gap-4">
+
+<div class="bg-white/15 backdrop-blur-xl rounded-3xl py-7 text-center">
+
+<div id="days"
+
+class="text-5xl font-black text-white">
+
+00
+
 </div>
+
+<div class="mt-3 text-white">
+
+روز
+
+</div>
+
+</div>
+
+<div class="bg-white/15 backdrop-blur-xl rounded-3xl py-7 text-center">
+
+<div id="hours"
+
+class="text-5xl font-black text-white">
+
+00
+
+</div>
+
+<div class="mt-3 text-white">
+
+ساعت
+
+</div>
+
+</div>
+
+<div class="bg-white/15 backdrop-blur-xl rounded-3xl py-7 text-center">
+
+<div id="minutes"
+
+class="text-5xl font-black text-white">
+
+00
+
+</div>
+
+<div class="mt-3 text-white">
+
+دقیقه
+
+</div>
+
+</div>
+
+<div class="bg-white/15 backdrop-blur-xl rounded-3xl py-7 text-center">
+
+<div id="seconds"
+
+class="text-5xl font-black text-white">
+
+00
+
+</div>
+
+<div class="mt-3 text-white">
+
+ثانیه
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 
 
-<div class="grid lg:grid-cols-2 gap-8">
-
-    <!-- تونیک ها -->
-
-    <div class="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 hover:-translate-y-2 transition duration-300">
-
-        <div class="flex items-center gap-3 mb-5">
-
-            <div class="w-14 h-14 rounded-2xl bg-purple-100 flex items-center justify-center text-3xl">
-                🧴
-            </div>
-
-            <div>
-                <h3 class="font-black text-2xl">
-                    پروموشن تونیک‌ها
-                </h3>
-
-                <p class="text-sm text-slate-500">
-                    تونیک و تقویت ابرو
-                </p>
-            </div>
-
-        </div>
-
-        <div class="space-y-3 mb-5">
-
-            <div class="bg-purple-50 p-4 rounded-xl flex justify-between">
-                <span>10 عدد جور</span>
-                <strong class="text-purple-700">1 آفر</strong>
-            </div>
-
-            <div class="bg-purple-50 p-4 rounded-xl flex justify-between">
-                <span>24 عدد جور</span>
-                <strong class="text-purple-700">4 آفر</strong>
-            </div>
-
-            <div class="bg-purple-100 p-4 rounded-xl flex justify-between">
-                <span>48 عدد جور</span>
-                <strong class="text-purple-700">12 آفر</strong>
-            </div>
-
-        </div>
-
-        <ul class="text-sm text-slate-600 leading-8">
-            <li>• تونیک پالمینکس</li>
-            <li>• تونیک پالمینکس پلاس</li>
-            <li>• تونیک کراستم</li>
-            <li>• کرم تقویت ابرو کراستم</li>
-        </ul>
-
-    </div>
+<div class="flex flex-wrap gap-8 justify-center items-start">
 
 
-    <!-- ویتامین سی -->
+  
 
-    <div class="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 hover:-translate-y-2 transition duration-300">
+<!-- =================== CARD : SHAMPOOS =================== -->
 
-        <div class="flex items-center gap-3 mb-5">
+<div class="group relative w-full
+md:w-[47%]
+xl:w-[31%] rounded-[34px] overflow-hidden
+bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500
+p-[2px]
+shadow-[0_20px_55px_rgba(245,158,11,.25)]
+hover:shadow-[0_35px_70px_rgba(245,158,11,.35)]
+transition duration-500">
 
-            <div class="w-14 h-14 rounded-2xl bg-orange-100 flex items-center justify-center text-3xl">
-                🍊
-            </div>
+<div class="bg-white rounded-[32px] p-8 flex flex-col">
 
-            <div>
-                <h3 class="font-black text-2xl">
-پروموشن                    ویتامین C و ضدلک
-                </h3>
-                <p class="text-sm text-slate-500">
-                    روشن‌کننده و ضدلک
-                </p>
-            </div>
+    <!-- Badge -->
 
-        </div>
+    <div class="flex justify-between items-start">
 
-        <div class="space-y-3 mb-5">
+        <span class="px-4 py-2 rounded-full
+        text-xs font-bold text-white
+        bg-gradient-to-r from-red-500 to-orange-500">
 
-            <div class="bg-orange-50 p-4 rounded-xl flex justify-between">
-                <span>8 عدد جور</span>
-                <strong class="text-orange-700">1 آفر</strong>
-            </div>
+        🔥 پرفروش‌ترین آفر
 
-            <div class="bg-orange-50 p-4 rounded-xl flex justify-between">
-                <span>18 عدد جور</span>
-                <strong class="text-orange-700">3 آفر</strong>
-            </div>
+        </span>
 
-            <div class="bg-orange-100 p-4 rounded-xl flex justify-between">
-                <span>24 عدد جور</span>
-                <strong class="text-orange-700">6 آفر</strong>
-            </div>
+        <div class="w-20 h-20 rounded-3xl
+        bg-gradient-to-br
+        from-yellow-100
+        to-amber-100
+        flex items-center justify-center
+        text-5xl">
 
-        </div>
-
-        <ul class="text-sm text-slate-600 leading-8">
-            <li>• کرم ضدلک</li>
-            <li>• کرم ویتامین C</li>
-            <li>• فوم براشدار ویتامین C</li>
-            <li>• فوم ژل ویتامین C</li>
-        </ul>
-
-    </div>
-
-
-    <!-- ضدآفتاب -->
-
-    <div class="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 hover:-translate-y-2 transition duration-300">
-
-        <div class="flex items-center gap-3 mb-5">
-
-            <div class="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center text-3xl">
-                ☀️
-            </div>
-
-            <div>
-                <h3 class="font-black text-2xl">
-                    پروموشن ضدآفتاب‌ها
-                </h3>
-
-                <p class="text-sm text-slate-500">
-                    تمامی ضدآفتاب‌های اویدرم
-                </p>
-            </div>
-
-        </div>
-
-        <div class="space-y-3 mb-5">
-
-            <div class="bg-yellow-50 p-4 rounded-xl flex justify-between">
-                <span>10 عدد جور</span>
-                <strong class="text-yellow-700">1 آفر</strong>
-            </div>
-
-            <div class="bg-yellow-50 p-4 rounded-xl flex justify-between">
-                <span>18 عدد جور</span>
-                <strong class="text-yellow-700">3 آفر</strong>
-            </div>
-
-            <div class="bg-yellow-100 p-4 rounded-xl flex justify-between">
-                <span>28 عدد جور</span>
-                <strong class="text-yellow-700">7 آفر</strong>
-            </div>
-
-        </div>
-
-        <ul class="text-sm text-slate-600 leading-8">
-            <li>• ضدآفتاب بی‌رنگ پوست چرب</li>
-            <li>• ضدآفتاب بی‌رنگ پوست خشک</li>
-            <li>• ضدآفتاب رنگی پوست چرب</li>
-            <li>• ضدآفتاب رنگی پوست خشک</li>
-            <li>• ضدآفتاب ضدلک</li>
-            <li>• ضدآفتاب ضدجوش</li>
-        </ul>
-
-    </div>
-
-
-    <!-- Evisensitive -->
-
-    <div class="bg-gradient-to-br from-[#B98CA9] to-[#9E6E90] text-white rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition duration-300">
-
-        <div class="flex items-center gap-3 mb-5">
-
-            <div class="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center text-3xl">
-                ⭐
-            </div>
-
-            <div>
-                <h3 class="font-black text-2xl">
-                     پروموشن Evisensitive
-                </h3>
-
-                <p class="text-white/80 text-sm">
-                    لاین تخصصی ترمیم کننده
-                </p>
-            </div>
-
-        </div>
-
-        <div class="space-y-3 mb-5">
-
-            <div class="bg-white/10 p-4 rounded-xl flex justify-between">
-                <span>6 عدد جور</span>
-                <strong>1 آفر</strong>
-            </div>
-
-            <div class="bg-white/10 p-4 rounded-xl flex justify-between">
-                <span>15 عدد جور</span>
-                <strong>3 آفر</strong>
-            </div>
-
-            <div class="bg-white/20 p-4 rounded-xl flex justify-between">
-                <span>24 عدد جور</span>
-                <strong class="text-yellow-300">8 آفر</strong>
-            </div>
-
-        </div>
-
-        <div class="grid grid-cols-2 gap-2 text-sm text-white/90">
-
-            <div>• کرم ترمیم زخم</div>
-            <div>• کرم سیلیکونی اسکار</div>
-            <div>• کرم ترمیم کبودی</div>
-            <div>• اسپری ترمیم زخم</div>
-            <div>• اسپری ضد درد و کبودی</div>
-            <div>• بالم لب</div>
-            <div>• کرم دور چشم</div>
-            <div>• کرم ناخن</div>
-            <div>• فوم پلک و مژه</div>
-            <div>• فوم ترمیم زخم</div>
+        🧴
 
         </div>
 
     </div>
 
+    <!-- Title -->
+
+    <h3 class="mt-8 text-4xl font-black text-slate-900">
+
+        پروموشن شامپوها
+
+    </h3>
+
+    <p class="mt-2 text-slate-500">
+
+        تمامی شامپوهای اویدرم
+
+    </p>
+
+    <!-- Offer Box -->
+
+    <div class="mt-8 rounded-3xl overflow-hidden
+    bg-gradient-to-br
+    from-yellow-500
+    via-amber-500
+    to-orange-500
+    text-white
+    shadow-xl">
+
+        <div class="p-8 text-center">
+
+            <div class="tracking-[4px]
+            text-xs
+            text-white/80">
+
+            SPECIAL OFFER
+
+            </div>
+
+            <div class="mt-3 text-7xl font-black">
+
+            7+1
+
+            </div>
+
+            <div class="mt-3 text-xl">
+
+            خرید بیش از ۴ کارتن جور
+
+            </div>
+
+            
+
+        </div>
+
+    </div>
+
+    <!-- Button -->
+
+    <button
+
+    onclick="toggleProducts('shampooProducts')"
+
+    class="mt-8
+    w-full
+    rounded-2xl
+    py-4
+    font-bold
+    text-white
+    bg-gradient-to-r
+    from-amber-500
+    to-orange-500
+    hover:scale-[1.02]
+    transition">
+
+    مشاهده محصولات →
+
+    </button>
+
+    <!-- Products -->
+
+    <div
+    id="shampooProducts"
+    class="product-list mt-5">
+
+        <div class="space-y-3">
+
+            <div class="rounded-xl
+            bg-amber-50
+            border border-amber-100
+            p-4">
+
+            ✔ تمامی شامپوهای اویدرم
+
+            </div>
+
+            <div class="rounded-xl
+            bg-amber-50
+            border border-amber-100
+            p-4">
+
+            📦 شرط آفر
+
+            <div class="text-slate-600 mt-1">
+
+            خرید بیش از ۴ کارتن جور
+
+            </div>
+
+            </div>
+
+            <div class="rounded-xl
+            bg-amber-50
+            border border-amber-100
+            p-4">
+
+            🎁 هدیه
+
+            <div class="text-slate-600 mt-1">
+
+            ۷ + ۱
+
+            </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
+</div>
 
+<!-- =================== CARD : TONIC =================== -->
+
+<div class="group relative
+w-full
+md:w-[47%]
+xl:w-[31%]
+rounded-[34px]
+overflow-hidden
+bg-gradient-to-br
+from-purple-500
+via-fuchsia-500
+to-pink-500
+p-[2px]
+shadow-[0_20px_55px_rgba(168,85,247,.25)]
+hover:shadow-[0_35px_70px_rgba(168,85,247,.35)]
+transition duration-500">
+
+<div class="bg-white rounded-[32px] p-8 flex flex-col">
+
+    <!-- Badge -->
+
+    <div class="flex justify-between items-start">
+
+        <span class="px-4 py-2 rounded-full
+        text-xs font-bold text-white
+        bg-gradient-to-r
+        from-orange-500
+        to-red-500">
+
+        ویژه مرداد
+
+        </span>
+
+        <div class="w-20 h-20 rounded-3xl
+        bg-gradient-to-br
+        from-purple-100
+        to-fuchsia-100
+        flex items-center justify-center
+        text-5xl">
+
+        💜
+
+        </div>
+
+    </div>
+
+    <!-- Title -->
+
+    <h3 class="mt-8 text-4xl font-black text-slate-900">
+
+        تونیک پالمینکس پلاس
+
+    </h3>
+
+    <p class="mt-2 text-slate-500">
+
+        آفر ویژه مرداد ۱۴۰۵
+
+    </p>
+
+    <!-- Offer -->
+
+    <div class="mt-8 rounded-3xl overflow-hidden
+    bg-gradient-to-br
+    from-purple-600
+    via-fuchsia-500
+    to-violet-600
+    text-white shadow-xl">
+
+        <div class="p-8 text-center">
+
+            <div class="tracking-[4px] text-xs text-white/80">
+
+                SPECIAL OFFER
+
+            </div>
+
+            <div class="mt-3 text-7xl font-black">
+
+                2+1
+
+            </div>
+
+            <div class="mt-3 text-xl">
+
+                از پایه خرید
+
+            </div>
+
+            <div class="mt-2 text-white/80">
+
+                فقط در جشنواره مرداد
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Button -->
+
+    <button
+        onclick="toggleProducts('tonicProducts')"
+        class="mt-8 w-full rounded-2xl py-4 font-bold text-white
+        bg-gradient-to-r
+        from-purple-600
+        to-fuchsia-600
+        hover:scale-[1.02]
+        transition">
+
+        مشاهده محصولات →
+
+    </button>
+
+    <!-- Products -->
+
+    <div id="tonicProducts"
+class="product-list mt-5">
+
+        <div class="rounded-xl
+        bg-purple-50
+        border border-purple-100
+        p-4">
+
+            ✔ تونیک پالمینکس پلاس
+
+        </div>
+
+        <div class="rounded-xl
+        bg-purple-50
+        border border-purple-100
+        p-4">
+
+            📦 آفر از پایه خرید
+
+        </div>
+
+        <div class="rounded-xl
+        bg-purple-50
+        border border-purple-100
+        p-4">
+
+            🎁 هدیه
+            <div class="text-slate-600 mt-1">
+
+                ۲ + ۱
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+  <!-- =================== CARD : FACE FOAMS =================== -->
+
+<div class="group relative
+w-full
+md:w-[47%]
+xl:w-[31%]
+rounded-[34px]
+overflow-hidden
+bg-gradient-to-br
+from-cyan-400
+via-sky-500
+to-blue-600
+p-[2px]
+shadow-[0_20px_55px_rgba(14,165,233,.25)]
+hover:shadow-[0_35px_70px_rgba(14,165,233,.35)]
+transition duration-500">
+
+<div class="bg-white rounded-[32px] p-8 flex flex-col">
+
+<!-- Badge -->
+
+<div class="flex justify-between items-start">
+
+<span class="px-4 py-2 rounded-full
+text-xs font-bold text-white
+bg-gradient-to-r
+from-cyan-500
+to-blue-600">
+
+⭐ ویژه مرداد
+
+</span>
+
+<div class="w-20 h-20 rounded-3xl
+bg-gradient-to-br
+from-cyan-100
+to-blue-100
+flex items-center justify-center
+text-5xl">
+
+🫧
+
+</div>
+
+</div>
+
+<!-- Title -->
+
+<h3 class="mt-8 text-4xl font-black text-slate-900">
+
+فوم‌های براشدار
+
+</h3>
+
+<p class="mt-2 text-slate-500">
+
+تمام فوم‌های شستشوی صورت اویدرم
+
+</p>
+
+<!-- Offer -->
+
+<div class="mt-8 rounded-3xl overflow-hidden
+bg-gradient-to-br
+from-cyan-500
+via-sky-500
+to-blue-600
+text-white shadow-xl">
+
+<div class="p-8 text-center">
+
+  <div class="tracking-[4px]
+  text-xs text-white/80">
+
+  SPECIAL OFFER
+
+  </div>
+
+  <div class="mt-3 text-5xl font-black">
+
+  6+1 | 5+1 | 3+1
+
+  </div>
+
+  <div class="mt-3 text-lg">
+
+  آفر پلکانی مردادماه
+
+  </div>
+
+</div>
+
+</div>
+
+<!-- Button -->
+
+<button
+onclick="toggleProducts('foamProducts')"
+class="mt-8 w-full rounded-2xl py-4
+font-bold text-white
+bg-gradient-to-r
+from-cyan-500
+to-blue-600
+hover:scale-[1.02]
+transition">
+
+مشاهده محصولات →
+
+</button>
+
+<!-- Products -->
+
+<div
+id="foamProducts"
+class="product-list mt-5">
+
+<div class="space-y-3">
+
+<div class="rounded-xl bg-cyan-50 border border-cyan-100 p-4">
+
+✔ فوم ویتامین A (رتینول)
+
+</div>
+
+<div class="rounded-xl bg-cyan-50 border border-cyan-100 p-4">
+
+✔ فوم ویتامین C
+
+</div>
+
+<div class="rounded-xl bg-cyan-50 border border-cyan-100 p-4">
+
+✔ فوم ترنگزامیک اسید
+
+</div>
+
+<div class="rounded-xl bg-cyan-50 border border-cyan-100 p-4">
+
+✔ فوم نیاسینامید
+
+</div>
+
+<div class="rounded-xl bg-cyan-50 border border-cyan-100 p-4">
+
+✔ فوم هیالورونیک اسید
+
+</div>
+
+<div class="rounded-xl bg-cyan-50 border border-cyan-100 p-4">
+
+✔ فوم ۱۰٪ آلفاهیدروکسی اسید
+
+</div>
+
+<div class="rounded-xl bg-cyan-50 border border-cyan-100 p-4">
+
+📦 خرید ۶ عدد جور → 🎁 ۶+۱
+
+</div>
+
+<div class="rounded-xl bg-cyan-50 border border-cyan-100 p-4">
+
+📦 خرید ۱۵ عدد جور → 🎁 ۵+۱
+
+</div>
+
+<div class="rounded-xl bg-cyan-50 border border-cyan-100 p-4">
+
+📦 خرید ۲۴ عدد جور → 🎁 ۳+۱
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+  <!-- =================== CARD : SUNSCREEN =================== -->
+
+<div class="group relative
+w-full
+md:w-[47%]
+xl:w-[31%]
+rounded-[34px]
+overflow-hidden
+bg-gradient-to-br
+from-yellow-400
+via-amber-500
+to-orange-500
+p-[2px]
+shadow-[0_20px_55px_rgba(245,158,11,.25)]
+hover:shadow-[0_35px_70px_rgba(245,158,11,.35)]
+transition duration-500">
+
+<div class="bg-white rounded-[32px] p-8 flex flex-col">
+
+<!-- Badge -->
+
+<div class="flex justify-between items-start">
+
+<span class="px-4 py-2 rounded-full
+text-xs font-bold text-white
+bg-gradient-to-r
+from-yellow-500
+to-orange-500">
+
+☀️ ویژه مرداد
+
+</span>
+
+<div class="w-20 h-20 rounded-3xl
+bg-gradient-to-br
+from-yellow-100
+to-orange-100
+flex items-center justify-center
+text-5xl">
+
+🧴
+
+</div>
+
+</div>
+
+<!-- Title -->
+
+<h3 class="mt-8 text-4xl font-black text-slate-900">
+
+ضدآفتاب‌های اویدرم
+
+</h3>
+
+<p class="mt-2 text-slate-500">
+
+تمام ضدآفتاب‌های اویدرم
+
+</p>
+
+<!-- Offer -->
+
+<div class="mt-8 rounded-3xl overflow-hidden
+bg-gradient-to-br
+from-yellow-500
+via-amber-500
+to-orange-500
+text-white shadow-xl">
+
+<div class="p-8 text-center">
+
+<div class="tracking-[4px]
+text-xs text-white/80">
+
+SPECIAL OFFER
+
+</div>
+
+<div class="mt-3 text-5xl font-black">
+
+5+1 | 4+1 | 3+1
+
+</div>
+
+<div class="mt-3 text-lg">
+
+آفر پلکانی مردادماه
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Button -->
+
+<button
+onclick="toggleProducts('sunProducts')"
+class="mt-8
+w-full
+rounded-2xl
+py-4
+font-bold
+text-white
+bg-gradient-to-r
+from-yellow-500
+to-orange-500
+hover:scale-[1.02]
+transition">
+
+مشاهده محصولات →
+
+</button>
+
+<!-- Products -->
+
+<div
+id="sunProducts"
+class="product-list mt-5">
+
+<div class="space-y-3">
+
+<div class="rounded-xl bg-yellow-50 border border-yellow-100 p-4">
+
+✔ ضدآفتاب بی‌رنگ پوست خشک
+
+</div>
+
+<div class="rounded-xl bg-yellow-50 border border-yellow-100 p-4">
+
+✔ ضدآفتاب بی‌رنگ پوست چرب
+
+</div>
+
+<div class="rounded-xl bg-yellow-50 border border-yellow-100 p-4">
+
+✔ ضدآفتاب رنگی پوست خشک
+
+</div>
+
+<div class="rounded-xl bg-yellow-50 border border-yellow-100 p-4">
+
+✔ ضدآفتاب رنگی پوست چرب
+
+</div>
+
+<div class="rounded-xl bg-yellow-50 border border-yellow-100 p-4">
+
+✔ ضدآفتاب ضدلک
+
+</div>
+
+<div class="rounded-xl bg-yellow-50 border border-yellow-100 p-4">
+
+✔ ضدآفتاب ضدجوش
+
+</div>
+
+<hr class="my-2">
+
+<div class="rounded-xl bg-yellow-50 border border-yellow-100 p-4">
+
+🎁 آفر پایه:
+<strong>۵ + ۱</strong>
+
+</div>
+
+<div class="rounded-xl bg-yellow-50 border border-yellow-100 p-4">
+
+📦 خرید ۱ کارتن جور
+→
+<strong>۴ + ۱</strong>
+
+</div>
+
+<div class="rounded-xl bg-yellow-50 border border-yellow-100 p-4">
+
+📦 خرید ۱.۵ کارتن جور
+→
+<strong>۳ + ۱</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =================== CARD : EVISENSITIVE =================== -->
+
+<div class="group relative
+w-full
+md:w-[47%]
+xl:w-[31%]
+rounded-[34px]
+overflow-hidden
+bg-gradient-to-br
+from-rose-300
+via-pink-300
+to-purple-300
+p-[2px]
+shadow-[0_20px_55px_rgba(190,120,170,.25)]
+hover:shadow-[0_35px_70px_rgba(190,120,170,.35)]
+transition duration-500">
+
+<div class="bg-white rounded-[32px] p-8 flex flex-col">
+
+    <!-- Badge -->
+
+    <div class="flex justify-between items-start">
+
+        <span class="px-4 py-2 rounded-full
+        text-xs font-bold text-white
+        bg-gradient-to-r
+        from-pink-500
+        to-rose-500">
+
+        Premium Line ✨
+
+        </span>
+
+        <div class="w-20 h-20 rounded-3xl
+        bg-gradient-to-br
+        from-pink-100
+        to-purple-100
+        flex items-center justify-center
+        text-5xl">
+
+        💎
+
+        </div>
+
+    </div>
+
+    <!-- Title -->
+
+    <h3 class="mt-8 text-4xl font-black text-slate-900">
+
+        Evisensitive
+
+    </h3>
+
+    <p class="mt-2 text-slate-500">
+
+        لاین تخصصی ترمیم‌کننده
+
+    </p>
+
+    <!-- Offer -->
+
+    <div class="mt-8 rounded-3xl overflow-hidden
+    bg-gradient-to-br
+    from-pink-400
+    via-rose-400
+    to-purple-400
+    text-white shadow-xl">
+
+        <div class="p-8 text-center">
+
+  <div class="tracking-[4px]
+  text-xs text-white/80">
+
+  SPECIAL OFFER
+
+  </div>
+
+  <div class="mt-3 text-5xl font-black">
+
+  6+1 | 5+1 | 3+1
+
+  </div>
+
+  <div class="mt-3 text-lg">
+
+  آفر پلکانی مردادماه
+
+  </div>
+
+</div>
+
+    </div>
+
+    <!-- Button -->
+
+    <button
+        onclick="toggleProducts('evisensitiveProducts')"
+        class="mt-8
+        w-full
+        rounded-2xl
+        py-4
+        font-bold
+        text-white
+        bg-gradient-to-r
+        from-pink-500
+        to-purple-500
+        hover:scale-[1.02]
+        transition">
+
+        مشاهده محصولات →
+
+    </button>
+
+    <!-- Products -->
+
+    <div
+    id="evisensitiveProducts"
+    class="product-list mt-5">
+
+        <div class="space-y-3">
+
+            <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+                ✔ کرم ترمیم زخم
+            </div>
+
+           <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+                ✔ کرم ارنیکا و دکسپنتنول
+            </div>
+
+            <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+                ✔ اسپری ترمیم زخم
+            </div>
+
+            <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+                ✔ بالم لب
+            </div>
+
+            <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+                ✔ کرم ناخن
+            </div>
+
+            <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+                ✔ فوم پلک و مژه
+            </div>
+
+            <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+                ✔ کرم سیلیکونی اسکار
+            </div>
+
+            <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+                ✔ اسپری آرنیکا
+            </div>
+
+            <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+                ✔ کرم آبرسان قوی دورچشم
+            </div>
+
+            <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+                ✔ فوم ترمیم زخم
+            </div>
+
+            <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+                ✔ کرم افتر تتو
+            </div>
+            <hr class="my-2">
+          <div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+
+🎁 آفر پایه:
+<strong>6 + 1</strong>
+
+</div>
+
+<div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+
+📦 خرید 15 عدد جور
+→
+<strong>5 + 1</strong>
+
+</div>
+
+<div class="rounded-xl bg-pink-50 border border-pink-100 p-4">
+
+📦 خرید 24 عدد جور
+→
+<strong>3 + 1</strong>
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
 
 
 </div></section>
@@ -950,37 +1796,14 @@ setInterval(()=>{
 </script>
 <script>
 
-const countdownDate = new Date("2026-07-22T15:00:00").getTime();
+const countdownDate = new Date("2026-08-22T15:00:00+03:30").getTime();
 
-const timer = setInterval(function(){
+const timer = setInterval(function () {
 
     const now = new Date().getTime();
-
     const distance = countdownDate - now;
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-
-    const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24))
-        / (1000 * 60 * 60)
-    );
-
-    const minutes = Math.floor(
-        (distance % (1000 * 60 * 60))
-        / (1000 * 60)
-    );
-
-    const seconds = Math.floor(
-        (distance % (1000 * 60))
-        / 1000
-    );
-
-    document.getElementById("days").innerHTML = days;
-    document.getElementById("hours").innerHTML = hours;
-    document.getElementById("minutes").innerHTML = minutes;
-    document.getElementById("seconds").innerHTML = seconds;
-
-    if(distance < 0){
+    if (distance <= 0) {
 
         clearInterval(timer);
 
@@ -989,11 +1812,48 @@ const timer = setInterval(function(){
         document.getElementById("minutes").innerHTML = "00";
         document.getElementById("seconds").innerHTML = "00";
 
+        return;
     }
 
-},1000);
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+
+    const seconds = Math.floor(
+        (distance % (1000 * 60)) /
+        1000
+    );
+
+    document.getElementById("days").innerHTML = String(days).padStart(2, "0");
+    document.getElementById("hours").innerHTML = String(hours).padStart(2, "0");
+    document.getElementById("minutes").innerHTML = String(minutes).padStart(2, "0");
+    document.getElementById("seconds").innerHTML = String(seconds).padStart(2, "0");
+
+}, 1000);
+
+
+
+function toggleProducts(id){
+
+    const product = document.getElementById(id);
+
+    product.classList.toggle("open");
+
+}
+
+
 
 </script>
+
+
 
 </body>
 </html>
